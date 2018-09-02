@@ -1,0 +1,149 @@
+<!DOCTYPE  html>
+<html ng-app="cricket">
+   <head>
+      
+      <script src="../../../../node_modules/angular/angular.min.js"></script>
+      <script src="../../../../node_modules/jquery/dist/jquery.min.js"></script>
+      <link href="css/cricketbuzz.css" rel="stylesheet">
+      <link rel="stylesheet" href="../../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <script src="../../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+       <script src="../../../../node_modules/chart.js/dist/Chart.min.js"></script>
+      
+      
+      <script type="text/javascript">
+         var app = angular.module('cricket', []);
+         
+         app.controller('cricketController',['$scope','cricQuestions', function($scope, cricQuestions){
+             $scope.correctAnswers=[];
+             $scope.incorrectAns = 0;
+             $scope.correctAns = 0;
+             
+             cricQuestions.getQuestions()
+                 .then(function (response)
+                 {
+                     $scope.questionList  = response.data;
+                     angular.forEach($scope.questionList, function(value, key) {
+                         $scope.correctAnswers.push(value.answer);
+                     });
+         
+                 }, function(error){
+                     console.log(error);
+                 }) ;
+         
+             $scope.submitQuestion = function(){
+                 var formElements = $('select.select-container');
+                 $scope.incorrectAns = 0;
+                 $scope.correctAns = 0;
+                 $(formElements).each(function( index,element ) {
+                    var select = "select_"+index;
+                    if (element.value === $scope.correctAnswers[index]) {
+                         $scope.cricketForm[select].$setValidity(select, true);
+                         $scope.correctAns++
+                     } else {
+                         $scope.incorrectAns++ 
+                         $scope.cricketForm[select].$setValidity(select, false);
+                     } 
+                 });
+                  $("#myChart").show();
+                     canvas();
+             }
+         
+             $scope.reset = function() {
+                 $scope.incorrectAns = 0;
+                 $scope.correctAns = 0;
+                 $("#myChart").hide();
+                 $scope.questionList = angular.copy($scope.questionList);
+             };
+             
+             
+             function canvas(){
+                 var ctx = document.getElementById("myChart").getContext('2d');
+                 var myChart = new Chart(ctx, {
+             type: 'bar',
+             data: {
+                 labels: ["Correct", "InCorrect"],
+                 datasets: [{
+                     label: 'Cricket Buzz',
+                     data: [$scope.correctAns, $scope.incorrectAns],
+                     backgroundColor: [
+                         '#000000',
+                         '#000000'
+                     ],
+                     hoverBackgroundColor:[
+                         '#000000',
+                         '#000000'
+                     ],
+                     hoverBorderColor:[
+                         '#000000',
+                         '#000000'
+                         
+                     ]
+                 }]
+             },
+             options: {
+                 scales: {
+                     yAxes: [{
+                         ticks: {
+                             beginAtZero:true,
+                             min:0,
+                             max:$scope.questionList.length,
+                             stepValue: 1,
+                             steps:1
+                         }
+                     }],
+                      xAxes: [{
+                         ticks: {
+                             beginAtZero:true,
+                             min:0,
+                             max:2,
+                             labelOffset:0
+                         }
+                     }]
+                 },
+                 
+             }
+         });
+             }
+         
+         }]);
+         
+         app.factory('cricQuestions',['$http',function($http){
+         
+             function getQuestions(){
+                 return $http.get('data/data.json');
+             }
+         
+             return {
+                 getQuestions: getQuestions
+             }
+         }]);
+         
+      </script>
+   </head>
+   <body>
+      <div class="main-container" ng-controller="cricketController">
+         <h1> Cricket Question</h1>
+         <div>
+            <div class="form-container-style">
+               <form class="form-style" name="cricketForm" novalidate ng-submit="submitQuestion()">
+                  <div ng-repeat="questionDetails in questionList" >
+                     <div class="questionarie">
+                        <div class="question" data-ng-bind="(questionDetails.serial)+ ('.') + (questionDetails.question)"></div>
+                        <select name="select_{{$index}}" ng-model="data" ng-class="{red: cricketForm.select_{{$index}}.$invalid }" class="select-container">
+                           <option class="select-option" ng-repeat="option in questionDetails.options" value="{{option}}" ng-bind="option"></option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="button-container">
+                     <button type="submit" class="btn btn-default  btn-lg btn-half">Submit</button>
+                     <button type="button" ng-click="reset()" class="btn btn-default  btn-lg btn-half">Clear</button>
+                  </div>
+               </form>
+            </div>
+            <div class="canvas-style">
+               <canvas id="myChart" width="900" height="200"></canvas>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

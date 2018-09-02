@@ -1,0 +1,34 @@
+{
+  "name": "cricketbuzz",
+  "version": "1.0.0",
+  "description": "cricket buzz with bar chart",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EshaanKumar/cricketbuzz.git"
+  },
+  "dependencies": {
+    "jquery":"3.3.1",
+    "angular": "1.5.8",
+    "angular-animate": "1.5.8",
+    "angular-aria": "1.5.8",
+    "angular-cookies": "1.5.8",
+    "angular-resource": "1.5.8",
+    "bootstrap": "^3.3.4",
+    "bi-app-sass": "*",
+    "angular-messages": "1.5.8",
+    "angular-translate": "~2.8.1",
+    "angular-sanitize": "1.5.8",
+    "angular-mocks": "1.5.8",
+	"chart.js":"^2.7.2"
+  },
+  "author": "Eshaan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EshaanKumar/cricketbuzz/issues"
+  },
+  "homepage": "https://github.com/EshaanKumar/cricketbuzz#readme"
+}

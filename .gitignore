@@ -1,0 +1,9 @@
+*.log
+*.iws
+*.ipr
+*.iml
+*.iml
+.idea
+.idea/**/*
+.git
+node_modules/**
