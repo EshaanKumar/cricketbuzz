@@ -18,7 +18,6 @@
     "angular-cookies": "1.5.8",
     "angular-resource": "1.5.8",
     "bootstrap": "^3.3.4",
-    "bi-app-sass": "*",
     "angular-messages": "1.5.8",
     "angular-translate": "~2.8.1",
     "angular-sanitize": "1.5.8",
