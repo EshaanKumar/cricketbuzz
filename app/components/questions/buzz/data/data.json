@@ -1,20 +1,27 @@
 [
   {
     "serial"  :"1",
-    "question": "what year india won the world cup?",
-    "options": ["2013","1998","1993","2011"],
-    "answer": "1993"
+    "question": "Which king declared cricket illegal in 1477?",
+    "options": ["Charlie II","Edward IV","Charles I","Edward V"],
+    "answer": "Edward IV"
   },
+  
   {
     "serial"  :"2",
-    "question": "Current Captain of india ?",
-    "options": ["Virat Kohli","MS Dhoni","Ganguly","Rohit Sharma"],
+    "question": "Who among is current Captain of india ?",
+    "options": ["Virat Kohli","MS Dhoni","Saurav Ganguly","Rohit Sharma"],
     "answer": "Virat Kohli"
   },
   {
     "serial"  :"3",
-    "question": "What is the Highest score by batsman in Test Match ?",
-    "options": ["375","400","444","309"],
-    "answer": "400"
+    "question": "Highest wicket taker in all formats of cricket?",
+    "options": ["M Muralitharan","SK Warne","A Kumble","GD McGrath"],
+    "answer": "M Muralitharan"
+  },
+  {
+    "serial"  :"4",
+    "question": "Which country won the first Cricket World Cup in 1975?",
+    "options": ["Australia","West Indies","India","South Africa"],
+    "answer": "West Indies"
   }
 ]
